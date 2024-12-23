@@ -22,15 +22,15 @@ export default function SignupPage() {
             console.log("Signup success", response.data);
             toast.success("Signup successful!");
             router.push("/login");
-        } toast.error(
-            error .response?.data?.message || 
-            error .message || 
-            "Signup failed. Please try again."
-        );
+        } catch(error:any){
+            console.log("Signup failed",error.messagr);
+
+            toast.error(error.message);
+        }
          finally {
             setLoading(false);
         }
-    };
+    }
 
     useEffect(() => {
         if (user.email.length > 0 && user.password.length > 0 && user.username.length > 0) {
@@ -38,11 +38,10 @@ export default function SignupPage() {
         } else {
             setButtonDisabled(true);
         }
-    }, [user]);
-
-    return (
+    }, [user])
+return(
         <div className="flex flex-col items-center justify-center min-h-screen py-2 text-black">
-            <h1>{loading ? "Processing..." : "Signup"}</h1>
+            <h1>{ loading ? "Processing..." : "Signup"}</h1>
             <hr />
             <label htmlFor="username">Username</label>
             <input
@@ -53,7 +52,7 @@ export default function SignupPage() {
                 onChange={(e) => setUser({ ...user, username: e.target.value })}
                 placeholder="Username"
             />
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">email</label>
             <input
                 className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600"
                 id="email"
@@ -62,27 +61,23 @@ export default function SignupPage() {
                 onChange={(e) => setUser({ ...user, email: e.target.value })}
                 placeholder="Email"
             />
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">password</label>
             <input
                 className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600"
                 id="password"
                 type="password"
                 value={user.password}
                 onChange={(e) => setUser({ ...user, password: e.target.value })}
-                placeholder="Password"
+                placeholder="password"
             />
             <button
                 onClick={onSignup}
-                className={`p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 ${
-                    buttonDisabled ? "bg-gray-300 text-gray-600 cursor-not-allowed" : "bg-blue-500 text-white"
-                }`}
-                disabled={buttonDisabled}
-            >
-                {buttonDisabled ? "No Signup" : "Signup"}
-            </button>
+                className= "p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600">
+                 Signup here </button>
             <Link href="/login">
-                <a className="text-blue-500 underline">Visit login page</a>
+                Visit login page
             </Link>
         </div>
-    );
+        
+    )
 }

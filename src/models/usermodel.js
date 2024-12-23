@@ -2,23 +2,23 @@ import mongoose from "mongoose";
 import { type } from "os";
 const userSchema = new mongoose.Schema({
     username:{
-        type:String,
+        type: String ,
         required:[true,"please provide a username"],
-        unique:true,
+        unique: true,
         trim:true,
     },
     email:{
-        type: String,
+        type: String ,
         required:[true,"please provide a email"],
 
         unique: true,
     },
     password:{
-        type:String,
+        type:String ,
         required:[true,"please provide a password"]
         
     },
-    isVerified:{
+    isVerified: {
         type: Boolean,
         default: false,
     },
@@ -27,11 +27,11 @@ const userSchema = new mongoose.Schema({
         default: false,
     },
     forgotPasswordToken: String,
-    forgotPasswordTokenExpire: Date,
+    forgotPasswordTokenExpiry: Date,
     verifyToken: String,
     verifyTokenExpiry: Date,
 
 })
 const User = mongoose.models.users || mongoose.model
-("Users",userSchema);
+("users",userSchema);
 export default User;
